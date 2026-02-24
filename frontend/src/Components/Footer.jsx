@@ -1,99 +1,140 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Github, Twitter, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-950 text-gray-300">
-      <div className="max-w-7xl mx-auto px-6 py-14">
+    <footer className="relative overflow-hidden text-gray-300">
 
-        {/* Top Section */}
-        <div className="grid md:grid-cols-4 gap-10">
+      {/*  SAME PROFESSIONAL BG  */}
+      <div
+        className="absolute inset-0 bg-cover bg-center -z-20"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1920&auto=format&fit=crop')",
+        }}
+      />
 
-          {/* Brand */}
-          <motion.div
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black -z-10" />
+
+      {/* Floating Glow Effects */}
+      <m.div
+        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-500/20 blur-[140px] rounded-full -z-10"
+        animate={{ y: [0, 40, 0] }}
+        transition={{ duration: 14, repeat: Infinity }}
+      />
+
+      <m.div
+        className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/20 blur-[140px] rounded-full -z-10"
+        animate={{ y: [0, -40, 0] }}
+        transition={{ duration: 12, repeat: Infinity }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-6 py-20">
+
+        {/*  TOP GRID  */}
+        <div className="grid md:grid-cols-4 gap-14">
+
+          {/* BRAND */}
+          <m.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
             <Link to="/">
-              <h2 className="text-2xl font-bold text-white cursor-pointer">
-                🚀 Startup
+              <h2 className="text-4xl font-bold text-white">
+                 Startup
               </h2>
             </Link>
 
-            <p className="mt-4 text-sm text-gray-400">
-              Building modern digital experiences for startups and innovators.
+            <p className="mt-5 text-base text-gray-300 max-w-sm">
+              Building modern digital experiences for startups,
+              innovators, and forward-thinking businesses.
             </p>
 
-            {/* Social Icons */}
-            <div className="flex gap-4 mt-5">
-              <a href="https://twitter.com" target="_blank">
-                <Twitter />
-              </a>
-              <a href="https://github.com" target="_blank">
-                <Github />
-              </a>
-              <a href="https://linkedin.com" target="_blank">
-                <Linkedin />
-              </a>
-              <a href="mailto:hello@startup.com">
-                <Mail />
-              </a>
+            {/* SOCIAL ICONS */}
+            <div className="flex gap-4 mt-7">
+              {[Twitter, Github, Linkedin, Mail].map((Icon, i) => (
+                <m.a
+                  key={i}
+                  href="#"
+                  whileHover={{ y: -4, scale: 1.1 }}
+                  className="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition"
+                >
+                  <Icon size={20} />
+                </m.a>
+              ))}
             </div>
-          </motion.div>
+          </m.div>
 
-          {/* Product */}
+          {/* PRODUCT */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-white font-semibold text-lg mb-6">
+              Product
+            </h3>
+
+            <ul className="space-y-4 text-base">
               <li><Link to="/services" className="hover:text-white">Features</Link></li>
-              <li><Link to="/pricing" className="hover:text-white">Pricing</Link></li>
               <li><Link to="/projects" className="hover:text-white">Integrations</Link></li>
-              <li><Link to="/updates" className="hover:text-white">Updates</Link></li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* COMPANY */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-white font-semibold text-lg mb-6">
+              Company
+            </h3>
+
+            <ul className="space-y-4 text-base">
               <li><Link to="/about" className="hover:text-white">About</Link></li>
               <li><Link to="/careers" className="hover:text-white">Careers</Link></li>
-              <li><Link to="/blog" className="hover:text-white">Blog</Link></li>
               <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <motion.div
+          {/* NEWSLETTER */}
+          <m.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
           >
-            <h3 className="text-white font-semibold mb-4">Subscribe</h3>
+            <h3 className="text-white font-semibold text-lg mb-6">
+              Subscribe
+            </h3>
 
-            <p className="text-sm text-gray-400 mb-4">
-              Get product updates and startup news.
+            <p className="text-base text-gray-300 mb-5">
+              Get product updates, insights, and startup news.
             </p>
 
-            <div className="flex">
+            <div className="flex overflow-hidden rounded-xl border border-white/10 bg-white/10 backdrop-blur-md">
               <input
                 type="email"
                 placeholder="Enter email"
-                className="w-full px-4 py-2 rounded-l-lg bg-gray-900 border border-gray-700 focus:outline-none"
+                className="w-full px-4 py-3 bg-transparent focus:outline-none text-white placeholder-gray-400"
               />
-              <button className="bg-white text-black px-4 rounded-r-lg font-medium hover:bg-gray-200 transition">
+
+              <m.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-white text-black px-6 font-semibold"
+              >
                 Join
-              </button>
+              </m.button>
             </div>
-          </motion.div>
+          </m.div>
+
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} Startup. All rights reserved.</p>
+        {/*  BOTTOM BAR  */}
+        <div className="border-t border-white/10 mt-16 pt-7 flex flex-col md:flex-row justify-between items-center text-base text-gray-400">
 
-          <div className="flex gap-6 mt-3 md:mt-0">
+          <p>
+            © {new Date().getFullYear()} Startup. All rights reserved.
+          </p>
+
+          <div className="flex gap-7 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-white">Privacy</Link>
             <Link to="/terms" className="hover:text-white">Terms</Link>
             <Link to="/cookies" className="hover:text-white">Cookies</Link>

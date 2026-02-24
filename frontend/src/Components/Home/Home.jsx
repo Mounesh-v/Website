@@ -5,12 +5,14 @@ import WhyChooseUs from "../../Pages/WhyChooseUs";
 import OurProjects from "../../Pages/OurProjects";
 
 const Home = () => {
-  return <>
-  <Hero/>
-  <Brands/>
-  <WhyChooseUs/>
-  <OurProjects/>
-  </>;
+  return (
+    <>
+      <Hero />
+      <Brands />
+      <WhyChooseUs />
+      <OurProjects />
+    </>
+  );
 };
 
 export default Home;

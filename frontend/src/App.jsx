@@ -6,10 +6,8 @@ import Services from "./Pages/Services";
 import OurProjects from "./Pages/OurProjects";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-import Pricing from "./Pages/Pricing";
-import Updates from "./Pages/Updates";
 import Careers from "./Pages/Careers";
-import Blog from "./Pages/Blog";
+import NotFound from "./Pages/NotFound";
 
 const App = () => {
   return (
@@ -20,10 +18,12 @@ const App = () => {
         <Route path="/projects" element={<OurProjects />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/updates" element={<Updates />} />
         <Route path="/careers" element={<Careers />} />
-        <Route path="/blog" element={<Blog />} />
+        
+
+
+          <Route path="*" element={<NotFound />} />
+
       </Route>
     </Routes>
   );

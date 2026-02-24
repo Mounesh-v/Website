@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -9,25 +9,44 @@ const navLinks = [
   { name: "Projects", path: "/projects" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
+  { name: "Careers", path: "/careers" },
 ];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="w-full fixed p-4 top-0 left-0 z-50 bg-gradient-to-br from-[#7b95cd] via-[#7888cc] to-[#637eb9] text-white backdrop-blur-lg border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header className="fixed h-20 w-full top-0 left-0 z-50">
+      {/*  SAME BACKGROUND  */}
+      <div
+        className="absolute inset-0 bg-cover bg-center -z-20"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1920&auto=format&fit=crop')",
+        }}
+      />
 
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-xl -z-10" />
+
+      {/* Glow Effects */}
+      <m.div
+        className="absolute -top-32 left-1/3 w-[400px] h-[400px] bg-blue-500/20 blur-[120px] rounded-full -z-10"
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-white border-b border-white/10">
         {/* Logo */}
         <Link to="/">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold text-white cursor-pointer"
+            className="text-3xl font-bold cursor-pointer"
           >
             Startup
-          </motion.div>
+          </m.div>
         </Link>
 
         {/* Desktop Navigation */}
@@ -38,33 +57,29 @@ const Header = () => {
               to={link.path}
               className={({ isActive }) =>
                 `font-medium transition ${
-                  isActive
-                    ? "text-white"
-                    : "text-gray-400 hover:text-white"
+                  isActive ? "text-white" : "text-gray-400 hover:text-white"
                 }`
               }
             >
-              <motion.span whileHover={{ y: -2 }}>
-                {link.name}
-              </motion.span>
+              <m.span whileHover={{ y: -2 }}>{link.name}</m.span>
             </NavLink>
           ))}
         </nav>
 
         {/* CTA Button */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           className="hidden md:block"
         >
           <Link to="/contact">
-            <button className="px-5 py-2 rounded-xl bg-white text-black font-medium hover:bg-gray-800 transition">
+            <button className="px-5 py-2 rounded-xl bg-white text-black font-medium hover:scale-105 transition">
               Get Started
             </button>
           </Link>
-        </motion.div>
+        </m.div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Button */}
         <div className="md:hidden">
           <button onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
@@ -72,32 +87,51 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/*  Mobile Menu  */}
       {mobileOpen && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="md:hidden  bg-gradient-to-br from-[#8ca7e1] via-[#7888cc] to-[#638de6] border-gray-200"
+          className="relative md:hidden overflow-hidden"
         >
-          <div className="flex flex-col px-6 py-4 gap-4">
+          {/* SAME BACKGROUND */}
+          <div
+            className="absolute inset-0 bg-cover bg-center -z-20"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1920&auto=format&fit=crop')",
+            }}
+          />
+
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-xl -z-10" />
+
+          {/* Glow */}
+          <m.div
+            className="absolute -top-20 left-1/3 w-[300px] h-[300px] bg-blue-500/20 blur-[120px] rounded-full -z-10"
+            animate={{ y: [0, 20, 0] }}
+            transition={{ duration: 10, repeat: Infinity }}
+          />
+
+          <div className="flex flex-col px-6 py-6 gap-5 text-white border-b border-white/10">
             {navLinks.map((link, index) => (
               <NavLink
                 key={index}
                 to={link.path}
                 onClick={() => setMobileOpen(false)}
-                className="text-white font-medium hover:text-white"
+                className="text-lg font-medium hover:text-white"
               >
                 {link.name}
               </NavLink>
             ))}
 
             <Link to="/contact">
-              <button className="mt-2 px-5 py-2 rounded-xl bg-black text-white font-medium">
+              <button className="mt-3 px-6 py-3 rounded-xl bg-white text-black font-semibold">
                 Get Started
               </button>
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </header>
   );

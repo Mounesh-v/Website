@@ -1,50 +1,33 @@
 import React from "react";
 import { m } from "framer-motion";
-import {
-  Code2,
-  Smartphone,
-  Cloud,
-  Palette,
-  BarChart3,
-  ShieldCheck,
-} from "lucide-react";
+import { Search, Lightbulb, Code2, Rocket } from "lucide-react";
 
-const services = [
+const steps = [
+  {
+    icon: Search,
+    title: "Research & Planning",
+    desc: "We analyze business goals, audience needs, and project requirements before starting development.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Design & Strategy",
+    desc: "Our team designs intuitive user experiences and defines scalable technical architecture.",
+  },
   {
     icon: Code2,
-    title: "Web Development",
-    desc: "Modern scalable web applications built with React, Node.js and cloud technologies.",
+    title: "Development",
+    desc: "We build high-performance applications using modern technologies and best practices.",
   },
   {
-    icon: Smartphone,
-    title: "Mobile Apps",
-    desc: "Cross-platform mobile applications delivering smooth user experiences.",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Solutions",
-    desc: "Deploy, scale and manage applications securely on modern cloud infrastructure.",
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    desc: "Beautiful and user-centered interfaces focused on engagement and usability.",
-  },
-  {
-    icon: BarChart3,
-    title: "Digital Marketing",
-    desc: "Growth-driven marketing strategies powered by analytics and automation.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Cyber Security",
-    desc: "Protect your business with enterprise-grade security and monitoring solutions.",
+    icon: Rocket,
+    title: "Launch & Growth",
+    desc: "After deployment, we optimize performance and help your product scale successfully.",
   },
 ];
 
-const Services = () => {
+const WorkProcess = () => {
   return (
-    <section className="relative -mt-10 py-24 overflow-hidden">
+    <section className="relative py-24 overflow-hidden">
 
       {/*  SAME BACKGROUND  */}
       <div
@@ -73,7 +56,7 @@ const Services = () => {
 
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Heading */}
+        {/*  Heading  */}
         <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,20 +64,21 @@ viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h1 className="text-4xl font-bold text-white">
-            Our Services
-          </h1>
+          <h2 className="text-4xl font-bold text-white">
+            Our Work Process
+          </h2>
 
           <p className="mt-4 text-gray-300 max-w-2xl mx-auto">
-            We provide end-to-end digital solutions helping startups
-            and businesses launch, scale and succeed faster.
+            A proven workflow designed to deliver scalable,
+            innovative, and high-quality digital solutions.
           </p>
         </m.div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-          {services.map((service, index) => {
-            const Icon = service.icon;
+        {/*  Steps  */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+
+          {steps.map((step, index) => {
+            const Icon = step.icon;
 
             return (
               <m.div
@@ -102,10 +86,11 @@ viewport={{ once: true }}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.15 }}
                 whileHover={{ y: -6 }}
 transition={{ type: "spring", stiffness: 250 }}
                 className="
+                  relative
                   bg-white/10
                   backdrop-blur-lg
                   border border-white/10
@@ -114,32 +99,34 @@ transition={{ type: "spring", stiffness: 250 }}
                   shadow-lg
                   hover:bg-white/20
                   transition
+                  text-center
                 "
               >
+                {/* Step Number */}
+                <span className="absolute top-4 right-4 text-sm text-gray-400">
+                  0{index + 1}
+                </span>
+
                 {/* Icon */}
-                <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-white/20 text-white mb-5">
+                <div className="w-14 h-14 mx-auto flex items-center justify-center bg-white/20 text-white rounded-xl mb-5">
                   <Icon size={28} />
                 </div>
 
                 <h3 className="text-xl font-semibold text-white">
-                  {service.title}
+                  {step.title}
                 </h3>
 
                 <p className="text-gray-300 mt-3 text-sm">
-                  {service.desc}
+                  {step.desc}
                 </p>
-
-                <button className="mt-5 font-medium text-white hover:underline">
-                  Learn More →
-                </button>
               </m.div>
             );
           })}
-        </div>
 
+        </div>
       </div>
     </section>
   );
 };
 
-export default Services;
+export default WorkProcess;
