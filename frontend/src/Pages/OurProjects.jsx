@@ -1,6 +1,10 @@
 import React from "react";
 import { m } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import TechnologyStack from "./Services/TechnologyStack";
+import Industries from "./Services/Industries";
+import DigitalMarketing from "./Services/DigitalMarketing";
+
 
 const projects = [
   {
@@ -147,6 +151,9 @@ transition={{ type: "spring", stiffness: 250 }}
         </div>
 
       </div>
+      <Industries/>
+      <TechnologyStack/>
+      <DigitalMarketing/>
     </section>
   );
 };

@@ -1,7 +1,18 @@
 import React from "react";
 import { m } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const hadleNavigate = () => {
+    navigate("/contact");
+  };
+
+  const hadleProjects = () => {
+    navigate("/projects");
+  };
+
   return (
     <section className="relative -mt-10 h-screen w-full overflow-hidden">
       <div
@@ -33,11 +44,17 @@ const Hero = () => {
           </p>
 
           <div className="mt-8 flex gap-4">
-            <button className="px-7 py-3 bg-white text-black rounded-xl font-semibold hover:scale-105 transition">
+            <button
+              onClick={hadleProjects}
+              className="px-7 py-3 bg-white text-black rounded-xl font-semibold hover:scale-105 transition"
+            >
               Explore Solutions
             </button>
 
-            <button className="px-7 py-3 border border-white rounded-xl hover:bg-white hover:text-black transition">
+            <button
+              onClick={hadleNavigate}
+              className="px-7 py-3 border border-white rounded-xl hover:bg-white hover:text-black transition"
+            >
               Contact Us
             </button>
           </div>

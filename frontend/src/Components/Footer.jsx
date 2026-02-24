@@ -45,8 +45,8 @@ viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <Link to="/">
-              <h2 className="text-4xl font-bold text-white">
-                 Startup
+              <h2 className="text-2xl font-bold text-white">
+                 Alagu Tech Solution
               </h2>
             </Link>
 
@@ -77,6 +77,7 @@ viewport={{ once: true }}
             </h3>
 
             <ul className="space-y-4 text-base">
+              <li><Link to="/" className="hover:text-white">Home</Link></li>
               <li><Link to="/services" className="hover:text-white">Features</Link></li>
               <li><Link to="/projects" className="hover:text-white">Integrations</Link></li>
             </ul>

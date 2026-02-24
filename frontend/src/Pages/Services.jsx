@@ -8,44 +8,45 @@ import {
   BarChart3,
   ShieldCheck,
 } from "lucide-react";
+import StaffAugmentation from "./Services/StaffAugmentation";
+import AIServices from "./Services/AIServices";
 
 const services = [
   {
     icon: Code2,
-    title: "Web Development",
-    desc: "Modern scalable web applications built with React, Node.js and cloud technologies.",
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile Apps",
-    desc: "Cross-platform mobile applications delivering smooth user experiences.",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Solutions",
-    desc: "Deploy, scale and manage applications securely on modern cloud infrastructure.",
+    title: "Software Development",
+    desc: "Custom web & desktop applications, enterprise software solutions, and API integrations with automation workflows.",
   },
   {
     icon: Palette,
     title: "UI/UX Design",
-    desc: "Beautiful and user-centered interfaces focused on engagement and usability.",
+    desc: "User research, wireframing, interactive prototypes, and complete product design with branding strategy.",
+  },
+  {
+    icon: Smartphone,
+    title: "Web Development",
+    desc: "Responsive websites, scalable e-commerce platforms, and CMS solutions using WordPress, React and modern stacks.",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    desc: "Cloud migration, CI/CD pipeline setup, infrastructure automation, and secure server & database management.",
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile App Development",
+    desc: "Native Android & iOS applications and cross-platform apps built with React Native and Flutter.",
   },
   {
     icon: BarChart3,
-    title: "Digital Marketing",
-    desc: "Growth-driven marketing strategies powered by analytics and automation.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Cyber Security",
-    desc: "Protect your business with enterprise-grade security and monitoring solutions.",
+    title: "Digital Solutions",
+    desc: "ERP & CRM systems, SaaS product development, and business automation tools to accelerate growth.",
   },
 ];
 
 const Services = () => {
   return (
     <section className="relative -mt-10 py-24 overflow-hidden">
-
       {/*  SAME BACKGROUND  */}
       <div
         className="absolute inset-0 bg-cover bg-center -z-20"
@@ -72,22 +73,19 @@ const Services = () => {
       />
 
       <div className="max-w-7xl mx-auto px-6">
-
         {/* Heading */}
         <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h1 className="text-4xl font-bold text-white">
-            Our Services
-          </h1>
+          <h1 className="text-4xl font-bold text-white">Our Services</h1>
 
           <p className="mt-4 text-gray-300 max-w-2xl mx-auto">
-            We provide end-to-end digital solutions helping startups
-            and businesses launch, scale and succeed faster.
+            We provide end-to-end digital solutions helping startups and
+            businesses launch, scale and succeed faster.
           </p>
         </m.div>
 
@@ -101,10 +99,10 @@ viewport={{ once: true }}
                 key={index}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
+                viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -6 }}
-transition={{ type: "spring", stiffness: 250 }}
+                transition={{ type: "spring", stiffness: 250 }}
                 className="
                   bg-white/10
                   backdrop-blur-lg
@@ -125,9 +123,7 @@ transition={{ type: "spring", stiffness: 250 }}
                   {service.title}
                 </h3>
 
-                <p className="text-gray-300 mt-3 text-sm">
-                  {service.desc}
-                </p>
+                <p className="text-gray-300 mt-3 text-sm">{service.desc}</p>
 
                 <button className="mt-5 font-medium text-white hover:underline">
                   Learn More →
@@ -136,8 +132,9 @@ transition={{ type: "spring", stiffness: 250 }}
             );
           })}
         </div>
-
       </div>
+      <StaffAugmentation/>
+      <AIServices/>
     </section>
   );
 };
