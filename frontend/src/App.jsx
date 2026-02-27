@@ -8,6 +8,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Careers from "./Pages/Careers";
 import NotFound from "./Pages/NotFound";
+import Portfolio from "./Pages/Portfolios/Portfolio";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/portfolios" element={<Portfolio />} />
         
 
 

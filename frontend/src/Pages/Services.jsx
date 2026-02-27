@@ -15,32 +15,34 @@ const services = [
   {
     icon: Code2,
     title: "Software Development",
-    desc: "Custom web & desktop applications, enterprise software solutions, and API integrations with automation workflows.",
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    desc: "User research, wireframing, interactive prototypes, and complete product design with branding strategy.",
+    desc: "Custom web & desktop applications , Enterprise software solutions,API integrations and automation",
   },
   {
     icon: Smartphone,
     title: "Web Development",
-    desc: "Responsive websites, scalable e-commerce platforms, and CMS solutions using WordPress, React and modern stacks.",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud & DevOps",
-    desc: "Cloud migration, CI/CD pipeline setup, infrastructure automation, and secure server & database management.",
+    desc: "Responsive websites, E-commerce platforms, CMS-based websites(Word Press, React, etc.)",
   },
   {
     icon: Smartphone,
     title: "Mobile App Development",
-    desc: "Native Android & iOS applications and cross-platform apps built with React Native and Flutter.",
+    desc: "Android & iOS apps Cross-platform apps (React Native, Flutter).",
   },
+  {
+    icon: Palette,
+    title: "UI/UX Design",
+    desc: "User research & wireframing , Interactive prototypes, Product design & branding.",
+  },
+
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    desc: "Cloud migration & maintenance , Continuous integration & deployment (Cl/CD)Server & database management.",
+  },
+
   {
     icon: BarChart3,
     title: "Digital Solutions",
-    desc: "ERP & CRM systems, SaaS product development, and business automation tools to accelerate growth.",
+    desc: "ERP & CRM solutions SaaS product development Business automation tools.",
   },
 ];
 
@@ -133,8 +135,8 @@ const Services = () => {
           })}
         </div>
       </div>
-      <StaffAugmentation/>
-      <AIServices/>
+      <StaffAugmentation />
+      <AIServices />
     </section>
   );
 };

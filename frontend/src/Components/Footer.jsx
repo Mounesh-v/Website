@@ -1,6 +1,6 @@
 import React from "react";
 import { m } from "framer-motion";
-import { Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, Phone, Globe, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -97,34 +97,42 @@ viewport={{ once: true }}
           </div>
 
           {/* NEWSLETTER */}
-          <m.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-          >
-            <h3 className="text-white font-semibold text-lg mb-6">
-              Subscribe
-            </h3>
+          {/* CONTACT INFO */}
+<m.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+>
+  <h3 className="text-white font-semibold text-lg mb-6">
+    Contact Us
+  </h3>
 
-            <p className="text-base text-gray-300 mb-5">
-              Get product updates, insights, and startup news.
-            </p>
+  <div className="space-y-4 text-base">
 
-            <div className="flex overflow-hidden rounded-xl border border-white/10 bg-white/10 backdrop-blur-md">
-              <input
-                type="email"
-                placeholder="Enter email"
-                className="w-full px-4 py-3 bg-transparent focus:outline-none text-white placeholder-gray-400"
-              />
+    <p className="flex items-start gap-3">
+      <Mail size={18} />
+      info@alaguts.com
+    </p>
 
-              <m.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-white text-black px-6 font-semibold"
-              >
-                Join
-              </m.button>
-            </div>
-          </m.div>
+    <p className="flex items-start gap-3">
+      <Phone size={18} />
+      +91-9751339617
+    </p>
+
+    <p className="flex items-start gap-3">
+      <Globe size={18} />
+      www.alaguts.com
+    </p>
+
+    <p className="flex items-start gap-3">
+      <MapPin size={18} />
+      9/i-1, KTR Complex,
+      Agraharam Street, Near MSB Nadar Bus Stand,
+      Virudhunagar - 626001, India.
+    </p>
+
+  </div>
+</m.div>
 
         </div>
 

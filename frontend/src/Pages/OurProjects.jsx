@@ -5,7 +5,6 @@ import TechnologyStack from "./Services/TechnologyStack";
 import Industries from "./Services/Industries";
 import DigitalMarketing from "./Services/DigitalMarketing";
 
-
 const projects = [
   {
     title: "AI SaaS Dashboard",
@@ -44,8 +43,7 @@ const projects = [
   },
   {
     title: "Cloud Management Tool",
-    description:
-      "Cloud deployment and monitoring solution for modern teams.",
+    description: "Cloud deployment and monitoring solution for modern teams.",
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
   },
@@ -54,7 +52,6 @@ const projects = [
 const OurProjects = () => {
   return (
     <section className="relative py-24 overflow-hidden">
-
       {/*  Professional Background  */}
       <div
         className="absolute inset-0 bg-cover bg-center -z-20"
@@ -81,22 +78,19 @@ const OurProjects = () => {
       />
 
       <div className="max-w-7xl mx-auto px-6">
-
         {/* Heading */}
         <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h2 className="text-4xl font-bold text-white">
-            Our Projects
-          </h2>
+          <h2 className="text-4xl font-bold text-white">Our Projects</h2>
 
           <p className="mt-4 text-gray-300 max-w-2xl mx-auto">
-            Explore some of the innovative products and solutions
-            we've built for startups and growing businesses.
+            Explore some of the innovative products and solutions we've built
+            for startups and growing businesses.
           </p>
         </m.div>
 
@@ -107,15 +101,11 @@ viewport={{ once: true }}
               key={index}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
+              viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -6 }}
-transition={{ type: "spring", stiffness: 250 }}
-              className="
-                group
-                bg-white/10
-                backdrop-blur-lg
-                border border-white/10
+              transition={{ type: "spring", stiffness: 250 }}
+              className="group bg-white/10 backdrop-blur-lg border border-white/10
                 rounded-2xl
                 overflow-hidden
                 shadow-lg
@@ -149,11 +139,10 @@ transition={{ type: "spring", stiffness: 250 }}
             </m.div>
           ))}
         </div>
-
       </div>
-      <Industries/>
-      <TechnologyStack/>
-      <DigitalMarketing/>
+      <Industries />
+      <TechnologyStack />
+      <DigitalMarketing />
     </section>
   );
 };
