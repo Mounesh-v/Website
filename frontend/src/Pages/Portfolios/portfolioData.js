@@ -1,61 +1,62 @@
+import exude from "../../assets/projects/excude.png";
+import giga from "../../assets/projects/giga.png";
+import vorgan from "../../assets/projects/vorgan.png";
+import denner from "../../assets/projects/denner.png";
+import byo from "../../assets/projects/byo.png";
+import bizi from "../../assets/projects/bizi.png";
+
 export const portfolioData = [
   {
     id: 1,
-    title: "AI SaaS Dashboard",
+    title: "Women’s Fashion E-commerce Platform",
     description:
-      "Analytics platform helping businesses monitor performance using AI insights.",
-    image:
-      "https://images.unsplash.com/photo-1551281044-8c6b7b7d1b5b?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
+      "An online store offering premium western wear designed for modern, stylish, and professional lifestyles.",
+    image: exude,
+    link: "https://www.exude.in/",
   },
 
   {
     id: 2,
-    title: "E-Commerce Platform",
+    title: "Personalised Kids Gifts & Puzzle Store",
     description:
-      "Full MERN stack online shopping platform with payment integration.",
-    image:
-      "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
+      "An Indian e-commerce website offering customised gifts, educational puzzles, and personalised photo products designed to enhance children’s learning, creativity, and memories.",
+    image: giga,
+    link: "https://www.gigga.in/",
   },
 
   {
     id: 3,
-    title: "Startup Landing Page",
+    title: "Digital Marketing & Technology Solutions Platform",
     description:
-      "Modern startup landing page optimized for conversions and marketing.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
+      "A technology-driven company providing digital marketing, online growth, and tech-based solutions to help businesses improve visibility, customer acquisition, and online performance.",
+    image: vorgan,
+    link: "https://voorganic.tech/",
   },
 
   {
     id: 4,
-    title: "AI Chat Application",
+    title: "Denner — Flats & Roommates App",
     description:
-      "Realtime AI chatbot platform built using modern web technologies.",
-    image:
-      "https://images.unsplash.com/photo-1677442135136-760c813028c0?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
+      "A rental platform that helps users find verified flats, shared accommodations, and compatible roommates while also offering a community hub for events and local offers in Pune.",
+    image: denner,
+    link: "https://play.google.com/store/apps/details?id=com.denner.denner",
   },
 
   {
     id: 5,
-    title: "Portfolio Website",
+    title: "Online Flight Booking Platform",
     description:
-      "Animated developer portfolio built using React and Tailwind.",
-    image:
-      "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
+      "A travel booking website that helps users compare and book affordable flights from multiple airlines with no booking fees, offering easy and budget-friendly travel planning.",
+    image: byo,
+    link: "https://home.byojet.com/",
   },
 
   {
     id: 6,
-    title: "Admin Dashboard",
+    title: "Business Management & CRM Application",
     description:
-      "Modern admin dashboard with analytics and reporting system.",
-    image:
-      "https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
+      "A cloud-based mobile app that helps businesses manage customer relationships, sales, marketing, and service operations efficiently in one platform.",
+    image: bizi,
+    link: "https://play.google.com/store/apps/details?id=com.bizplus.test",
   },
 ];

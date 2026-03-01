@@ -6,7 +6,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const hadleNavigate = () => {
-    navigate("/contact");
+    navigate("/Investment-Partner");
   };
 
   const hadleProjects = () => {

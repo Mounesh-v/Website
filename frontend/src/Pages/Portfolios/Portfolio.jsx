@@ -12,7 +12,7 @@ export default function Portfolio() {
 
         <p className="text-gray-400 text-center mt-4">
           Take a look at some of the projects we've crafted with innovation,
-  precision, and cutting-edge technology.
+          precision, and cutting-edge technology.
         </p>
 
         {/* Portfolio Grid */}

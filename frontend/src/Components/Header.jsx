@@ -9,7 +9,7 @@ const navLinks = [
   // { name: "Projects", path: "/projects" },
   { name: "Portfolios", path: "/portfolios" },
   { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" },
+  { name: "Investment Partner", path: "/Investment-Partner" },
   { name: "Careers", path: "/careers" },
 ];
 
@@ -18,7 +18,6 @@ const Header = () => {
 
   return (
     <header className="fixed w-full top-0 left-0 z-50 h-20">
-
       {/* SAME BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center -z-20"
@@ -40,7 +39,6 @@ const Header = () => {
 
       {/* NAV CONTAINER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between text-white border-b border-white/10">
-
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
           <m.div
@@ -61,15 +59,11 @@ const Header = () => {
               to={link.path}
               className={({ isActive }) =>
                 `font-medium transition whitespace-nowrap ${
-                  isActive
-                    ? "text-white"
-                    : "text-gray-400 hover:text-white"
+                  isActive ? "text-white" : "text-gray-400 hover:text-white"
                 }`
               }
             >
-              <m.span whileHover={{ y: -2 }}>
-                {link.name}
-              </m.span>
+              <m.span whileHover={{ y: -2 }}>{link.name}</m.span>
             </NavLink>
           ))}
         </nav>
@@ -80,7 +74,7 @@ const Header = () => {
           animate={{ opacity: 1, x: 0 }}
           className="hidden md:block"
         >
-          <Link to="/contact">
+          <Link to="/">
             <button className="px-4 lg:px-5 py-2 rounded-xl bg-white text-black font-medium hover:scale-105 transition">
               Get Started
             </button>
@@ -89,10 +83,7 @@ const Header = () => {
 
         {/* Mobile Button */}
         <div className="md:hidden flex items-center">
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2"
-          >
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2">
             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
@@ -105,7 +96,6 @@ const Header = () => {
           animate={{ opacity: 1, height: "auto" }}
           className="relative md:hidden overflow-hidden"
         >
-
           {/* SAME BG */}
           <div
             className="absolute inset-0 bg-cover bg-center -z-20"
@@ -124,7 +114,6 @@ const Header = () => {
           />
 
           <div className="flex flex-col px-6 py-6 gap-5 text-white border-b border-white/10">
-
             {navLinks.map((link, index) => (
               <NavLink
                 key={index}
@@ -141,7 +130,6 @@ const Header = () => {
                 Get Started
               </button>
             </Link>
-
           </div>
         </m.div>
       )}
