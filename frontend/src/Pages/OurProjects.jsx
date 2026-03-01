@@ -105,13 +105,7 @@ const OurProjects = () => {
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 250 }}
-              className="group bg-white/10 backdrop-blur-lg border border-white/10
-                rounded-2xl
-                overflow-hidden
-                shadow-lg
-                hover:bg-white/20
-                transition
-              "
+              className="group bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden shadow-lg hover:bg-white/20 transition"
             >
               {/* Image */}
               <div className="overflow-hidden">
