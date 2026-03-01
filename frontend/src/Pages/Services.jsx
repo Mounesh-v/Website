@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import StaffAugmentation from "./Services/StaffAugmentation";
 import AIServices from "./Services/AIServices";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -47,6 +48,11 @@ const services = [
 ];
 
 const Services = () => {
+  const navigate = useNavigate();
+  const hadleLearn = () => {
+    navigate("/Investment-Partner");
+  };
+
   return (
     <section className="relative -mt-10 py-24 overflow-hidden">
       {/*  SAME BACKGROUND  */}
@@ -127,7 +133,10 @@ const Services = () => {
 
                 <p className="text-gray-300 mt-3 text-sm">{service.desc}</p>
 
-                <button className="mt-5 font-medium text-white hover:underline">
+                <button
+                  onClick={hadleLearn}
+                  className="mt-5 font-medium text-white hover:underline"
+                >
                   Learn More →
                 </button>
               </m.div>
