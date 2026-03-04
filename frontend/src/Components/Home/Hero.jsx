@@ -33,7 +33,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="text-white"
         >
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+          <h1 className="text-5xl md:text-5xl font-bold leading-tight">
             Engineering Digital
             <span className="block text-blue-400">Future Experiences</span>
           </h1>

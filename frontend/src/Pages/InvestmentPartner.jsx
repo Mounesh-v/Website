@@ -1,67 +1,112 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
-const partners = [
-  {
-    name: "TechVentures Capital",
-    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400",
-    desc: "Supporting innovative startups with strategic investments.",
-  },
-  {
-    name: "Future Growth Fund",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400",
-    desc: "Accelerating scalable technology solutions worldwide.",
-  },
-  {
-    name: "Global Innovation Hub",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400",
-    desc: "Empowering next-generation digital transformation.",
-  },
-  {
-    name: "AI Venture Labs",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400",
-    desc: "Investing in AI-driven products and intelligent systems.",
-  },
-];
-
-export default function InvestmentPartner() {
+const InvestmentPartner = () => {
   return (
-    <section className="w-full  py-30 bg-gradient-to-r from-[#081c2c] via-[#0b2e4a] to-[#140b2e] text-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold">Our Investment Partners</h2>
+    <section className="w-full py-24 bg-gradient-to-r from-[#081c2c] via-[#0b2e4a] to-[#140b2e] text-white">
+      <div className="max-w-4xl mx-auto px-6">
+        <m.form
+          action="https://formsubmit.co/mouneshv776@gmail.com"
+          method="POST"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-10 shadow-lg"
+        >
+          <h2 className="text-2xl  font-bold text-center mb-4">
+            Strategic Investment Partnership
+          </h2>
 
-          <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
-            Collaborating with visionary investors who help us build, scale, and
-            deliver innovative digital solutions worldwide.
+          <p className="text-gray-300 text-center mb-10">
+            Partner with us to expand digital services, build innovative
+            products, and scale global technology solutions together.
           </p>
-        </div>
 
-        {/* Partner Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {partners.map((partner, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 shadow-lg hover:border-cyan-400"
-            >
-              <img
-                src={partner.image}
-                alt={partner.name}
-                className="h-40 w-full object-cover"
-              />
+          {/* FormSubmit */}
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
 
-              <h3 className="text-xl font-semibold mb-3">{partner.name}</h3>
+          {/*  CONTACT INFO  */}
+          <h3 className="formHeading">Contact Information</h3>
 
-              <p className="text-gray-300 text-sm leading-relaxed">
-                {partner.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+          <input
+            name="name"
+            required
+            placeholder="Full Name"
+            className="inputStyle"
+          />
+          <input
+            name="email"
+            required
+            type="email"
+            placeholder="Business Email"
+            className="inputStyle"
+          />
+          <input
+            name="company"
+            placeholder="Company / Organization"
+            className="inputStyle"
+          />
+
+          {/*  PARTNERSHIP TYPE  */}
+          <h3 className="formHeading mt-8 text-white">Partnership Type</h3>
+
+          <select
+            name="partnershipType"
+            className="w-full mb-4 p-3 rounded-lg 
+  bg-white/10 border border-white/20 
+  text-white outline-none focus:border-cyan-400"
+          >
+            <option value="" className="text-black">
+              Select Partnership Type
+            </option>
+            <option className="text-black">Investment Partner</option>
+            <option className="text-black">Business Collaboration</option>
+            <option className="text-black">Technology Partner</option>
+            <option className="text-black">Channel / Sales Partner</option>
+            <option className="text-black">Joint Venture</option>
+          </select>
+
+          <input
+            name="investmentRange"
+            placeholder="Investment / Collaboration Budget"
+            className="inputStyle"
+          />
+
+          <select
+            name="interestArea"
+            className="w-full mb-4 p-3 rounded-lg 
+  bg-white/10 border border-white/20 
+  text-white outline-none focus:border-cyan-400"
+          >
+            <option value="" className="text-black">
+              Area of Interest
+            </option>
+
+            <option className="text-black">Web Development</option>
+            <option className="text-black">Mobile App Development</option>
+            <option className="text-black">AI Solutions</option>
+            <option className="text-black">Product Development</option>
+            <option className="text-black">Startup Collaboration</option>
+          </select>
+
+          {/*  MESSAGE  */}
+          <h3 className="formHeading mt-8">Proposal</h3>
+
+          <textarea
+            name="message"
+            rows="4"
+            placeholder="Tell us about your partnership or investment proposal..."
+            className="inputStyle"
+          />
+
+          <button className="w-full mt-8 bg-cyan-500 hover:bg-cyan-600 transition py-3 rounded-lg font-semibold">
+            Submit Partnership Request
+          </button>
+        </m.form>
       </div>
     </section>
   );
-}
+};
+
+export default InvestmentPartner;

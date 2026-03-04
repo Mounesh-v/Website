@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { m } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -40,19 +41,25 @@ const Header = () => {
       {/* NAV CONTAINER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between text-white border-b border-white/10">
         {/* Logo */}
-        <Link to="/" className="flex-shrink-0">
+        <Link to="/" className="flex-shrink-100">
           <m.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-xl sm:text-2xl md:text-3xl font-bold cursor-pointer whitespace-nowrap"
+            className="flex items-center"
           >
-            Alagu Tech Solution
+            <div className="bg-white/80 px-2 py-1 rounded-xl shadow-md">
+              <img
+                src={logo}
+                alt="Alagu Tech Solution"
+                className="h-10 md:h-12 w-auto object-contain"
+              />
+            </div>
           </m.div>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-5">
           {navLinks.map((link, index) => (
             <NavLink
               key={index}
@@ -67,19 +74,6 @@ const Header = () => {
             </NavLink>
           ))}
         </nav>
-
-        {/* CTA */}
-        <m.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="hidden md:block"
-        >
-          <Link to="/">
-            <button className="px-4 lg:px-5 py-2 rounded-xl bg-white text-black font-medium hover:scale-105 transition">
-              Get Started
-            </button>
-          </Link>
-        </m.div>
 
         {/* Mobile Button */}
         <div className="md:hidden flex items-center">
@@ -124,12 +118,6 @@ const Header = () => {
                 {link.name}
               </NavLink>
             ))}
-
-            <Link to="/contact">
-              <button className="mt-3 w-full px-6 py-3 rounded-xl bg-white text-black font-semibold">
-                Get Started
-              </button>
-            </Link>
           </div>
         </m.div>
       )}
