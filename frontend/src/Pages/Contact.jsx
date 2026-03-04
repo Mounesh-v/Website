@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { m } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
-import InvestmentPartner from "./InvestmentPartner";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -54,7 +53,6 @@ const Contact = () => {
   };
   return (
     <>
-      <InvestmentPartner />
       <section className="relative py-24 overflow-hidden">
         {/*  SAME GLOBAL BACKGROUND  */}
         <div

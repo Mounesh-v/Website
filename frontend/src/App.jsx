@@ -9,6 +9,7 @@ import Contact from "./Pages/Contact";
 import Careers from "./Pages/Careers";
 import NotFound from "./Pages/NotFound";
 import Portfolio from "./Pages/Portfolios/Portfolio";
+import InvestmentPartner from "./Pages/InvestmentPartner";
 
 const App = () => {
   return (
@@ -18,14 +19,12 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/projects" element={<OurProjects />} />
         <Route path="/about" element={<About />} />
-        <Route path="/Investment-Partner" element={<Contact />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/portfolios" element={<Portfolio />} />
-        
+        <Route path="/Investment-Partner" element={<InvestmentPartner />} />
 
-
-          <Route path="*" element={<NotFound />} />
-
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
