@@ -4,6 +4,12 @@ import vorgan from "../../assets/projects/vorgan.png";
 import denner from "../../assets/projects/denner.png";
 import byo from "../../assets/projects/byo.png";
 import bizi from "../../assets/projects/bizi.png";
+import npm from "../../assets/projects/npm.png";
+import play from "../../assets/projects/play.png";
+import lore from "../../assets/projects/lore.png";
+import unicorn from "../../assets/projects/unicorn.png";
+import monad from "../../assets/projects/monad.png";
+import escrow from "../../assets/projects/escrow.png";
 
 export const portfolioData = [
   {
@@ -59,4 +65,50 @@ export const portfolioData = [
     image: bizi,
     link: "https://play.google.com/store/apps/details?id=com.bizplus.test",
   },
+];
+
+
+export const extraProjects = [
+  {
+    id: 100,
+    title: "Stylus Toolkit",
+    description: "Utility toolkit for Stylus development.",
+    image: npm,
+    link: "https://www.npmjs.com/package/stylus-toolkit"
+  },
+  {
+    id: 101,
+    title: "Play2Earn Base",
+    description: "Web3 gaming reward platform.",
+    image: play,
+    link: "https://play2earn-base.vercel.app/"
+  },
+  {
+    id: 102,
+    title: "Lore Mint Airdrop",
+    description: "Crypto airdrop dashboard.",
+    image: lore,
+    link: "https://lore-mint-airdrop.vercel.app/"
+  },
+  {
+    id: 103,
+    title: "Unicorn Launchpad",
+    description: "Blockchain launchpad dashboard.",
+    image: unicorn,
+    link: "https://unicorn-launchpad-jwm1.vercel.app/"
+  },
+  {
+    id: 104,
+    title: "Monad Dashboard",
+    description: "Analytics dashboard for Web3.",
+    image: monad,
+    link: "https://monad-dashboard-umber.vercel.app/"
+  },
+  {
+    id: 105,
+    title: "Escrow Dapp",
+    description: "EVM based escrow smart contract dashboard.",
+    image: escrow,
+    link: "https://escrow-dapp-evm.vercel.app/"
+  }
 ];
