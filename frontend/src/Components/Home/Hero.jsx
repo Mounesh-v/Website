@@ -13,8 +13,13 @@ const Hero = () => {
     navigate("/projects");
   };
 
+  const scheduleCall =()=>{
+    const phoneNumber = import.meta.env.VITE_PHONE_NUMBER;
+    window.location.href = `tel:${phoneNumber}`;
+  }
+
   return (
-    <section className="relative -mt-10 h-screen w-full overflow-hidden">
+    <section className="relative -mt-10 h-screen w-full ">
       <div
         className="absolute inset-0 bg-cover bg-center -z-20"
         style={{
@@ -52,10 +57,10 @@ const Hero = () => {
             </button>
 
             <button
-              onClick={hadleNavigate}
-              className="px-7 py-3 border border-white rounded-xl hover:bg-white hover:text-black transition"
+              onClick={scheduleCall}
+              className="px-7 py-3 border border-white rounded-xl hover:bg-indigo-950 hover:text-white cursor-pointer hover:border-none transition"
             >
-              Contact Us
+              Schedule a call
             </button>
           </div>
         </m.div>

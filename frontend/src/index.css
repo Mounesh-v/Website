@@ -1,8 +1,4 @@
 @import "tailwindcss";
-* {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 600;

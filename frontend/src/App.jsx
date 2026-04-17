@@ -10,23 +10,28 @@ import Careers from "./Pages/Careers";
 import NotFound from "./Pages/NotFound";
 import Portfolio from "./Pages/Portfolios/Portfolio";
 import InvestmentPartner from "./Pages/InvestmentPartner";
+import Whatsapp from "./Components/Whatsapp";
 
 const App = () => {
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/projects" element={<OurProjects />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/portfolios" element={<Portfolio />} />
-        <Route path="/Investment-Partner" element={<InvestmentPartner />} />
+    <>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/projects" element={<OurProjects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/portfolios" element={<Portfolio />} />
+          <Route path="/Investment-Partner" element={<InvestmentPartner />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+
+      <Whatsapp />
+    </>
   );
 };
 
