@@ -20,17 +20,20 @@ const Contact = () => {
     const toastId = toast.loading("Sending message...");
 
     try {
-      const response = await fetch("http://localhost:5000/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/send-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: form.email,
+            subject: "New Contact Message",
+            message: form.message,
+          }),
         },
-        body: JSON.stringify({
-          email: form.email,
-          subject: "New Contact Message",
-          message: form.message,
-        }),
-      });
+      );
 
       const data = await response.json();
 
