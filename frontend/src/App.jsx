@@ -11,10 +11,12 @@ import NotFound from "./Pages/NotFound";
 import Portfolio from "./Pages/Portfolios/Portfolio";
 import InvestmentPartner from "./Pages/InvestmentPartner";
 import Whatsapp from "./Components/Whatsapp";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <>
+    <Toaster position="top-right" reverseOrder={false} />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />

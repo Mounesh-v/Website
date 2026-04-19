@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { m } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
+import toast from "react-hot-toast";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -16,39 +17,36 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const toastId = toast.loading("Sending message...");
+
     try {
-      const response = await fetch(
-        "https://formsubmit.co/ajax/mouneshv696@gmail.com",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            name: form.name,
-            email: form.email,
-            message: form.message,
-
-            _subject: "🚀 New Contact Message - Alagu Tech Solutions",
-
-            _template: "table",
-          }),
+      const response = await fetch("http://localhost:5000/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          email: form.email,
+          subject: "New Contact Message",
+          message: form.message,
+        }),
+      });
 
       const data = await response.json();
 
-      if (data.success === "true" || data.success) {
-        alert("Message Sent Successfully ✅");
+      if (data.success) {
+        toast.success("Message sent successfully ✅", { id: toastId });
+
         setForm({
           name: "",
           email: "",
           message: "",
         });
+      } else {
+        toast.error("Failed to send message ❌", { id: toastId });
       }
     } catch (error) {
-      alert("Failed to send message ❌");
+      toast.error("Server error ❌", { id: toastId });
     }
   };
   return (
