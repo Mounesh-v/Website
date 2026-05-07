@@ -126,9 +126,7 @@ viewport={{ once: true }}
 
     <p className="flex items-start gap-3">
       <MapPin size={18} />
-      9/i-1, KTR Complex,
-      Agraharam Street, Near MSB Nadar Bus Stand,
-      Virudhunagar - 626001, India.
+      9/i-1, KTR Complex, Agraharam Street, Near MSB Nadar Bus Stand, Virudhunagar - 626001,Tamilnadu, India.
     </p>
 
   </div>
