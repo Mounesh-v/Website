@@ -147,4 +147,8 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Server Running 🚀");
+});
+
 app.listen(5000, () => console.log("Server running on port 5000"));
