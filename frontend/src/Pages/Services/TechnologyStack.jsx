@@ -1,11 +1,34 @@
 import React from "react";
 
 const stack = {
-  Frontend: ["React", "Angular", "Vue"],
-  Backend: ["Node.js", "Express", "Python", "PHP", ".NET"],
-  Mobile: ["Flutter", "React Native", "Kotlin"],
-  Database: ["MySQL", "MongoDB", "PostgreSQL", "Firebase"],
-  Cloud: ["AWS", "Google Cloud", "Azure"],
+  Frontend: [
+    { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
+    { name: "Vue", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
+  ],
+  Backend: [
+    { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+    { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+    { name: ".NET", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" },
+  ],
+  Mobile: [
+    { name: "Flutter", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+    { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "Kotlin", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+  ],
+  Database: [
+    { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+    { name: "Firebase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+  ],
+  Cloud: [
+    { name: "AWS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+    { name: "Google Cloud", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
+    { name: "Azure", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+  ],
 };
 
 export default function TechnologyStack() {
@@ -33,8 +56,16 @@ export default function TechnologyStack() {
           {Object.entries(stack).map(([key, values]) => (
             <div key={key} className="bg-white/10 p-6 rounded-xl">
               <h3 className="text-xl font-semibold mb-4">{key}</h3>
-              {values.map((v, i) => (
-                <p key={i} className="text-gray-300">{v}</p>
+              {values.map((tech, i) => (
+                <div key={i} className="flex items-center gap-3 py-1">
+                  <img
+                    src={tech.logo}
+                    alt={tech.name}
+                    className="w-6 h-6 object-contain flex-shrink-0"
+                    onError={(e) => (e.currentTarget.style.display = "none")}
+                  />
+                  <p className="text-gray-300">{tech.name}</p>
+                </div>
               ))}
             </div>
           ))}

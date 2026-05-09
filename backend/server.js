@@ -192,6 +192,7 @@ app.get("/", (req, res) => {
 
 // Contact form email route - OPTIMIZED
 app.post("/send-email", async (req, res) => {
+  console.log(req.body);
   const { name, email, subject, message } = req.body;
 
   // Validate required fields

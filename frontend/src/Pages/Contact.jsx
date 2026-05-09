@@ -7,6 +7,7 @@ const Contact = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
 
@@ -18,7 +19,7 @@ const Contact = () => {
     e.preventDefault();
 
     // Validate form fields
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    if (!form.name.trim() || !form.email.trim() || !form.subject.trim() || !form.message.trim()) {
       toast.error("Please fill in all fields ❌");
       return;
     }
@@ -39,7 +40,7 @@ const Contact = () => {
           body: JSON.stringify({
             name: form.name,
             email: form.email,
-            subject: "New Contact Message from Website",
+            subject: form.subject,
             message: form.message,
           }),
           signal: controller.signal,
@@ -55,6 +56,7 @@ const Contact = () => {
         setForm({
           name: "",
           email: "",
+          subject: "",
           message: "",
         });
       } else {
@@ -160,6 +162,20 @@ const Contact = () => {
                   name="email"
                   placeholder="Enter your email"
                   value={form.email}
+                  onChange={handleChange}
+                  className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-300 mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="What is this about?"
+                  value={form.subject}
                   onChange={handleChange}
                   className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
