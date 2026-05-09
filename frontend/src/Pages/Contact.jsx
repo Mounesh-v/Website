@@ -26,6 +26,9 @@ const Contact = () => {
     const toastId = toast.loading("Sending message...");
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/send-email`,
         {
@@ -39,9 +42,11 @@ const Contact = () => {
             subject: "New Contact Message from Website",
             message: form.message,
           }),
+          signal: controller.signal,
         },
       );
 
+      clearTimeout(timeoutId);
       const data = await response.json();
 
       if (data.success) {
@@ -59,7 +64,11 @@ const Contact = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Server error ❌", { id: toastId });
+      if (error.name === "AbortError") {
+        toast.error("Request timeout - Please try again ⏱️", { id: toastId });
+      } else {
+        toast.error("Server error ❌", { id: toastId });
+      }
     }
   };
   return (

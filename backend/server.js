@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const app = express();
 
+// Middleware
 app.use(
   cors({
     origin: "*",
@@ -12,35 +13,63 @@ app.use(
 );
 app.use(express.json());
 
-// POST route
-app.post("/send-email", async (req, res) => {
-  const { name, email, subject, message } = req.body;
+// ============================================
+// NODEMAILER TRANSPORTER - REUSED CONNECTION
+// ============================================
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  // Optimized for Render deployment
+  connectionTimeout: 5000, // 5 seconds
+  socketTimeout: 10000, // 10 seconds
+  maxConnections: 5,
+  maxMessages: 100,
+  rateDelta: 1000,
+  rateLimit: 5, // 5 emails per second
+});
 
-  // Validate required fields
-  if (!name || !email || !subject || !message) {
-    return res.status(400).json({ 
-      success: false, 
-      message: "All fields (name, email, subject, message) are required" 
-    });
+// Verify transporter on startup
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("❌ Transporter verification failed:", error.message);
+  } else {
+    console.log("✅ Transporter verified - Ready to send emails");
   }
+});
 
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
 
-    //  1. EMAIL TO YOU (ADMIN)
-    await transporter.sendMail({
-      from: `"Website Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER, //  YOU receive this
-      replyTo: email, //  reply directly to user
-      subject: `🚀 New Contact Submission - ${name}`,
+/**
+ * Create a timeout promise that rejects after specified milliseconds
+ * @param {number} ms - Milliseconds before timeout
+ * @param {string} message - Error message
+ * @returns {Promise}
+ */
+const createTimeoutPromise = (ms, message = "Operation timeout") => {
+  return new Promise((_, reject) =>
+    setTimeout(() => reject(new Error(message)), ms),
+  );
+};
 
-      html: `
+/**
+ * Send admin notification email
+ * @param {Object} mailData - { name, email, subject, message }
+ * @returns {Promise}
+ */
+const sendAdminEmail = (mailData) => {
+  const { name, email, subject, message } = mailData;
+
+  return transporter.sendMail({
+    from: `"Website Contact" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_USER,
+    replyTo: email,
+    subject: `🚀 New Contact Submission - ${name}`,
+    html: `
   <div style="background:#f4f6f8;padding:30px 0;font-family:Arial,sans-serif;">
     <div style="max-width:600px;margin:auto;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.08);">
 
@@ -79,15 +108,22 @@ app.post("/send-email", async (req, res) => {
     </div>
   </div>
 `,
-    });
+  });
+};
 
-    //  2. EMAIL TO USER (PROFESSIONAL)
-    await transporter.sendMail({
-      from: `"Alagu Tech Solutions" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "We received your message 🚀",
+/**
+ * Send user confirmation email
+ * @param {Object} mailData - { name, email, subject, message }
+ * @returns {Promise}
+ */
+const sendUserEmail = (mailData) => {
+  const { name, email, message } = mailData;
 
-      html: `
+  return transporter.sendMail({
+    from: `"Alagu Tech Solutions" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: "We received your message 🚀",
+    html: `
   <div style="background:#f4f6f8;padding:30px 0;font-family:Arial,sans-serif;">
     <div style="max-width:600px;margin:auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.1);">
 
@@ -132,23 +168,104 @@ app.post("/send-email", async (req, res) => {
     </div>
   </div>
 `,
+  });
+};
+
+// ============================================
+// ROUTES
+// ============================================
+
+// Health check endpoint
+app.get("/", (req, res) => {
+  res.json({
+    status: "Server Running 🚀",
+    timestamp: new Date().toISOString(),
+  });
+});
+
+// Contact form email route - OPTIMIZED
+app.post("/send-email", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  // Validate required fields
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({
+      success: false,
+      message: "All fields (name, email, subject, message) are required",
+    });
+  }
+
+  try {
+    // Send both emails in parallel with timeout protection
+    // Total timeout: 20 seconds for both emails
+    const allEmails = Promise.all([
+      sendAdminEmail({ name, email, subject, message }),
+      sendUserEmail({ name, email, message }),
+    ]);
+
+    const timeoutPromise = createTimeoutPromise(
+      20000,
+      "Email sending timeout - Request took too long",
+    );
+
+    // Race against timeout
+    await Promise.race([allEmails, timeoutPromise]);
+
+    console.log(
+      `✅ Emails sent successfully for: ${email} (Subject: ${subject})`,
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Email sent successfully!",
+    });
+  } catch (error) {
+    console.error("❌ Email sending error:", {
+      message: error.message,
+      code: error.code,
+      timestamp: new Date().toISOString(),
     });
 
-    res.status(200).json({ success: true, message: "Email sent successfully!" });
-  } catch (error) {
-    console.error("Email sending error:", error.message);
-    
     let errorMessage = "Error sending email";
-    if (error.message.includes("Invalid login")) {
-      errorMessage = "Email authentication failed. Check EMAIL_USER and EMAIL_PASS.";
+    let statusCode = 500;
+
+    if (error.message.includes("timeout")) {
+      errorMessage = "Email sending timeout - Please try again.";
+    } else if (
+      error.message.includes("Invalid login") ||
+      error.message.includes("invalid credentials")
+    ) {
+      errorMessage =
+        "Email authentication failed. Check EMAIL_USER and EMAIL_PASS.";
+      statusCode = 401;
+    } else if (
+      error.code === "ECONNREFUSED" ||
+      error.code === "ETIMEDOUT" ||
+      error.message.includes("SMTP")
+    ) {
+      errorMessage =
+        "SMTP connection failed. Please check your internet connection.";
+      statusCode = 503;
     }
-    
-    res.status(500).json({ success: false, message: errorMessage });
+
+    res.status(statusCode).json({
+      success: false,
+      message: errorMessage,
+    });
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("Server Running 🚀");
-});
+// ============================================
+// SERVER STARTUP
+// ============================================
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`
+╔═══════════════════════════════════════╗
+║   🚀 Alagu Tech Solutions Backend   ║
+║      Server Running on Port ${PORT}    ║
+╚═══════════════════════════════════════╝
+  `);
+});
