@@ -17,6 +17,12 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate form fields
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      toast.error("Please fill in all fields ❌");
+      return;
+    }
+
     const toastId = toast.loading("Sending message...");
 
     try {
@@ -28,8 +34,9 @@ const Contact = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            name: form.name,
             email: form.email,
-            subject: "New Contact Message",
+            subject: "New Contact Message from Website",
             message: form.message,
           }),
         },
@@ -46,9 +53,12 @@ const Contact = () => {
           message: "",
         });
       } else {
-        toast.error("Failed to send message ❌", { id: toastId });
+        toast.error(data.message || "Failed to send message ❌", {
+          id: toastId,
+        });
       }
     } catch (error) {
+      console.error(error);
       toast.error("Server error ❌", { id: toastId });
     }
   };
