@@ -1,5 +1,5 @@
 const express = require("express");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -14,38 +14,16 @@ app.use(
 app.use(express.json());
 
 // ============================================
-// NODEMAILER TRANSPORTER - REUSED CONNECTION
+// RESEND EMAIL CLIENT - REUSED INSTANCE
 // ============================================
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-    family: 4, // Force IPv4
-  },
-  // Optimized for Render deployment
-  connectionTimeout: 10000, // 5 seconds
-  greetingTimeout: 10000,
-  socketTimeout: 15000, // 10 seconds
-  maxConnections: 5,
-  maxMessages: 100,
-  rateDelta: 1000,
-  rateLimit: 5, // 5 emails per second
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Verify transporter on startup
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("❌ Transporter verification failed:", error.message);
-  } else {
-    console.log("✅ Transporter verified - Ready to send emails");
-  }
-});
+// Verify Resend API key on startup
+if (!process.env.RESEND_API_KEY) {
+  console.error("❌ RESEND_API_KEY is not set in environment variables");
+} else {
+  console.log("✅ Resend API Key configured - Ready to send emails");
+}
 
 // ============================================
 // HELPER FUNCTIONS
@@ -71,9 +49,9 @@ const createTimeoutPromise = (ms, message = "Operation timeout") => {
 const sendAdminEmail = (mailData) => {
   const { name, email, subject, message } = mailData;
 
-  return transporter.sendMail({
-    from: `"Website Contact" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+  return resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
+    to: process.env.ADMIN_EMAIL,
     replyTo: email,
     subject: `🚀 New Contact Submission - ${name}`,
     html: `
@@ -126,8 +104,8 @@ const sendAdminEmail = (mailData) => {
 const sendUserEmail = (mailData) => {
   const { name, email, message } = mailData;
 
-  return transporter.sendMail({
-    from: `"Alagu Tech Solutions" <${process.env.EMAIL_USER}>`,
+  return resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
     to: email,
     subject: "We received your message 🚀",
     html: `
@@ -205,7 +183,8 @@ app.post("/send-email", async (req, res) => {
 
   try {
     // Send both emails in parallel with timeout protection
-    // Total timeout: 20 seconds for both emails
+    // 1. Admin email to company inbox
+    // 2. Confirmation email to user
     const allEmails = Promise.all([
       sendAdminEmail({ name, email, subject, message }),
       sendUserEmail({ name, email, message }),
@@ -219,13 +198,17 @@ app.post("/send-email", async (req, res) => {
     // Race against timeout
     await Promise.race([allEmails, timeoutPromise]);
 
-    console.log(
-      `✅ Emails sent successfully for: ${email} (Subject: ${subject})`,
-    );
+    console.log(`
+✅ Both emails sent successfully!
+   📧 Admin Email: ${process.env.ADMIN_EMAIL}
+   📧 User Email: ${email}
+   📝 Subject: ${subject}
+   ⏱️  Timestamp: ${new Date().toISOString()}
+    `);
 
     res.status(200).json({
       success: true,
-      message: "Email sent successfully!",
+      message: "Email sent successfully to both admin and your email!",
     });
   } catch (error) {
     console.error("❌ Email sending error:", {
@@ -240,19 +223,17 @@ app.post("/send-email", async (req, res) => {
     if (error.message.includes("timeout")) {
       errorMessage = "Email sending timeout - Please try again.";
     } else if (
-      error.message.includes("Invalid login") ||
-      error.message.includes("invalid credentials")
+      error.message.includes("API key") ||
+      error.message.includes("Unauthorized")
     ) {
-      errorMessage =
-        "Email authentication failed. Check EMAIL_USER and EMAIL_PASS.";
+      errorMessage = "Email service authentication failed. Check RESEND_API_KEY.";
       statusCode = 401;
     } else if (
-      error.code === "ECONNREFUSED" ||
-      error.code === "ETIMEDOUT" ||
-      error.message.includes("SMTP")
+      error.message.includes("ECONNREFUSED") ||
+      error.message.includes("Network")
     ) {
       errorMessage =
-        "SMTP connection failed. Please check your internet connection.";
+        "Email service connection failed. Please try again later.";
       statusCode = 503;
     }
 
